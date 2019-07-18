@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="true">
+    <!-- Console Appender -->
+<!--    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %C{2} (%F:%L) - %m%n" />
+        </layout>
+    </appender>-->
+    <!-- Info Log File Appender -->
+    <appender name="info-log" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="application.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <param name="MaxBackupIndex" value="20"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%p] %d %c %M - %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="debug" />
+            <param name="LevelMax" value="info" />
+            <param name="AcceptOnMatch" value="true" />
+        </filter>
+    </appender>
+<!--    <appender name="info-log" class="org.apache.log4j.RollingFileAppender">
+        <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+            <param name="FileNamePattern" value="/Users/mmaiti/Desktop/sams/nexgen/components/OraHub/lemas-log-hub/core/src/main/resources/logs/application_%d{ddMMyyyy}.log" />
+        </rollingPolicy>
+        <param name="File" value="info.log" />
+        <param name="MaxBackupIndex" value="20"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %C{2} (%F:%L) - %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="debug" />
+            <param name="LevelMax" value="info" />
+            <param name="AcceptOnMatch" value="true" />
+        </filter>
+    </appender>-->
+    <!-- Error Log File Appender -->
+    <appender name="error-log" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="application-error.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <param name="MaxBackupIndex" value="20"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%p] %d %c %M - %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <!--<param name="LevelMin" value="warn" />-->
+            <param name="LevelMin" value="error"/>
+            <param name="LevelMax" value="fatal" />
+            <param name="AcceptOnMatch" value="true" />
+        </filter>
+    </appender>
+<!--    <appender name="error-log" class="org.apache.log4j.RollingFileAppender">
+        <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+            <param name="FileNamePattern" value="/Users/mmaiti/Desktop/sams/nexgen/components/OraHub/lemas-log-hub/core/src/main/resources/logs/error_%d{ddMMyyyy}.log" />
+        </rollingPolicy>
+        <param name="Append" value="false" />
+        <param name="File" value="error.log" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %C{2} (%F:%L) - %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="warn" />
+            <param name="LevelMax" value="fatal" />
+            <param name="AcceptOnMatch" value="true" />
+        </filter>
+    </appender>-->
+    <logger name="com.mousam.kafka">
+        <appender-ref ref="info-log" />
+        <appender-ref ref="error-log" />
+    </logger>
+<!--    <root>
+        <level value="debug" />
+        <appender-ref ref="console" />
+    </root>-->
+</log4j:configuration>
